@@ -1,0 +1,27 @@
+.selected {
+    color: black;
+}
+
+.first-navlink {
+    margin-left: 10%;
+}
+
+.navlink {
+    margin-right: 10%;
+    text-decoration: none !important;
+    color: grey;
+}
+
+.navlink:hover {
+    font-size: large;
+    color: black;
+}
+
+.navlink:active {
+    color: black;
+}
+
+.btn-user {
+    
+    float: right;
+}
