@@ -11,25 +11,6 @@ export default function register() {
     const [passwordError, setPasswordError] = useState('');
     const [users, setUsers] = useState<User[]>([]);
 
-    async function getStaticProps(mail: string, password: string) {
-        const postBody = {
-            mail: mail,
-            password: password
-        };
-        const requestMetadata = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(postBody)
-        };
-        await fetch('http://localhost:3000/User/signup', requestMetadata)
-        .then(res =>res.json())
-        .then(recipes => {
-            return ({ recipes });
-        });
-    }
-
     async function onSubmit(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         event?.preventDefault();
 
@@ -56,8 +37,7 @@ export default function register() {
                 password,
             });
             setUsers(tmpUsers);
-            console.log(tmpUsers);
-            await getStaticProps(mail, password);
+            await getServerSide(mail, password);
         }
     }
 
@@ -81,8 +61,28 @@ export default function register() {
                 <input placeholder="password" type="password" value={password} onChange={ onPasswordChanged } />
                 <p>{ passwordError }</p>
                 
-                <Button type="submit" onClick={onSubmit}>S'identifier</Button>
+                <Button type="submit" onClick={onSubmit}>S'inscrire</Button>
             </Form>
         </div>
     );
+}
+
+export async function getServerSide(mail: string, password: string) {
+    const postBody = {
+        mail: mail,
+        password: password
+    };
+    const requestMetadata = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postBody)
+    };
+    await fetch('http://localhost:3001/User/signup', requestMetadata)
+    .then(res =>res.json())
+    .then(recipes => {
+        console.log(recipes);
+        return ({ recipes });
+    });
 }

@@ -2,7 +2,7 @@
     color: black;
 }
 
-.first-navlink {
+.first_navlink {
     margin-left: 10%;
 }
 
@@ -21,7 +21,7 @@
     color: black;
 }
 
-.btn-user {
-    
+.btn_user {
+    margin-right: 10%;
     float: right;
 }

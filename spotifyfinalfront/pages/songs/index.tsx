@@ -14,7 +14,7 @@ export default function song(props: ISongProps) {
 
 
     return (
-        <div className={styles.container}>
+        <div>
             <Navigation isConnected={isConnect} />
             <main className={styles.main}>
                 <table>

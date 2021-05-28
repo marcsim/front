@@ -10,7 +10,7 @@ type AlbumProps = {
     artist?: Artist;
 };
 
-const CardTemplate: FunctionComponent<AlbumProps> = (props: AlbumProps) => {
+export default function CardTemplate(props: AlbumProps) {
     return(
         <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src={ props.album?.cover } />
@@ -25,9 +25,6 @@ const CardTemplate: FunctionComponent<AlbumProps> = (props: AlbumProps) => {
         </Card>
     );
 };
-
-export default CardTemplate; 
-
 
 
 

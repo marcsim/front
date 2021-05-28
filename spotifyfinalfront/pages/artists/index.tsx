@@ -13,7 +13,7 @@ export default function artist(props: IArtistProps) {
     const [isConnect, setIsConnect] = useState(false);
     
     return (
-        <div className={styles.container}>
+        <div>
             <Navigation isConnected={isConnect} />
             <main className={styles.main}>
                 <table>

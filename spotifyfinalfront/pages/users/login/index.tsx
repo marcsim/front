@@ -11,26 +11,6 @@ export default function login() {
     const [passwordError, setPasswordError] = useState('');
     const [goToHome, setGoToHome] = useState(false);
 
-    async function getStaticProps(mail: string, password: string) {
-        const postBody = {
-            mail: mail,
-            password: password
-        };
-        const requestMetadata = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(postBody)
-        };
-
-        await fetch('http://localhost:3000/User/login', requestMetadata)
-        .then(res =>res.json())
-        .then(recipes => {
-            return ({ recipes });
-        });
-    }
-
     async function onSubmit(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         event?.preventDefault();
 
@@ -50,8 +30,10 @@ export default function login() {
         }
 
         if (valid) {
-            await getStaticProps(mail, password);
-            //return (<Redirect to="/"/>);
+            await getServerSide(mail, password);
+            if(window.localStorage.token) {
+                setIsConnect(true);
+            }
         } else {
             console.log('Erreur formulaire invalid');
         }
@@ -81,4 +63,28 @@ export default function login() {
             </main>
         </div>
     );
+}
+
+export async function getServerSide(mail: string, password: string) {
+    const postBody = {
+        mail: mail,
+        password: password
+    };
+    const requestMetadata = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postBody)
+    };
+
+    await fetch('http://localhost:3001/User/login', requestMetadata)
+    .then(res =>res.json())
+    .then(recipes => {
+        if (typeof window !== "undefined") {
+            localStorage.setItem('token', recipes.accessToken);
+        }
+        console.log('localstorage', window.localStorage);
+        return ({ recipes });
+    });
 }
