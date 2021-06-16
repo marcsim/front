@@ -31,7 +31,7 @@ export default function login() {
 
         if (valid) {
             await getServerSide(mail, password);
-            if(window.localStorage.token) {
+            if(window.localStorage.token !== 'undefined') {
                 setIsConnect(true);
             }
         } else {
@@ -81,8 +81,14 @@ export async function getServerSide(mail: string, password: string) {
     await fetch('http://localhost:3001/User/login', requestMetadata)
     .then(res =>res.json())
     .then(recipes => {
-        if (typeof window !== "undefined") {
-            localStorage.setItem('token', recipes.accessToken);
+        console.log('recipes', recipes);
+        //Afficher l'erreur
+        console.log('error', recipes.error);
+        
+        if (!recipes.error) {
+            if (typeof window !== "undefined") {
+                localStorage.setItem('token', recipes.accessToken);
+            }
         }
         console.log('localstorage', window.localStorage);
         return ({ recipes });

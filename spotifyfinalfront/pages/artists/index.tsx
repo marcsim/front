@@ -3,7 +3,9 @@ import Link from 'next/link';
 import { Artist } from "../api/dto/artist.model";
 import styles from '../../styles/Home.module.css'
 import Navigation  from '../component/navigation/navigation.component';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import CardArtistTemplate from '../component/card/cardArtist.component';
 
 type IArtistProps  = {
     artists: Artist[];
@@ -11,24 +13,42 @@ type IArtistProps  = {
 
 export default function artist(props: IArtistProps) {    
     const [isConnect, setIsConnect] = useState(false);
-    
+    useEffect(() => {
+        if(window.localStorage.token) {
+            setIsConnect(true);
+        }
+    }, []);
     return (
         <div>
             <Navigation isConnected={isConnect} />
-            <main className={styles.main}>
-                <table>
-                    <tbody>
-                        { props.artists.map((artist: Artist, index : number)=> (
-                            <tr>
-                                <td><Link href={'/artists/'+ artist.id}>{artist.name}</Link></td>
-                                <td>{artist.isBand}</td>
-                            </tr>
-                        ))} 
-                    </tbody>
-                </table>
-            </main>
+            <div className="container">
+                <h1 className={styles.title}>Artiste</h1>
+                <div className={styles.btn_add_right}>
+                    {
+                        isConnect ?  
+                        <div className="btn-add">
+                            <Link href="/artists/addArtist">
+                                <Button variant="danger">Ajouter un artiste</Button>
+                            </Link>
+                        </div> : <div></div>
+                    }
+                </div>
+                <div className={styles.cardMargin}>
+                    {
+                        props.artists.length === 0 ? <p>Aucun artiste disponible</p> :     
+                        <div className="row">
+                        {
+                            props.artists.map((artist, i) => 
+                                <div className="col-3 card">
+                                    <CardArtistTemplate key={i} artist={ artist } />
+                                </div>
+                            )
+                        }
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
-        
     );
 }
 

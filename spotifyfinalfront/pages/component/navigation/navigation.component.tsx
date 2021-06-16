@@ -1,5 +1,6 @@
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Button, Nav, Navbar } from 'react-bootstrap';
 import style from './navigation.module.css';
@@ -24,13 +25,17 @@ export default function Navigation(props: connexionProps) {
     }
     
     const connectDisplay = (
-        <div>
-            <Link href="/">
-                <Button onClick={signOut} variant="danger" className={style.btn_user}>Déconnexion</Button>
-            </Link>
-            <Link href="/users/profile">
-                <Button variant="primary" className={style.btn_user}>Mon compte</Button>
-            </Link>
+        <div className={style.btn_container}>
+            <div>
+                <Link href="/">
+                    <Button onClick={signOut} variant="danger" className={style.btn_user}>Déconnexion</Button>
+                </Link>
+            </div>
+            <div>
+                <Link href="/users/profile">
+                    <Button variant="primary" className={style.btn_user}>Mon compte</Button>
+                </Link>
+            </div>
         </div>
     );
     const notConnectDisplay = (
@@ -47,6 +52,15 @@ export default function Navigation(props: connexionProps) {
 
     return (
         <Navbar bg="warning" expand="lg">
+            <Navbar.Brand href="/">
+                <Image
+                    src="/headphoneLogo.jpg"
+                    width="50"
+                    height="50"
+                    className="d-inline-block align-top"
+                    alt="headphone logo"
+                />
+            </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">

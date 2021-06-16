@@ -113,6 +113,14 @@
   margin-left: 0.5rem;
 }
 
+.btn_add_right {
+  float: right;
+}
+
+.cardMargin {
+  margin: 5%;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;

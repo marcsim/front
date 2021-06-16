@@ -1,8 +1,9 @@
 import { Song } from "../../api/dto/song.model";
 import Link from 'next/link';
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from '../../component/navigation/navigation.component';
-
+import { Button } from "react-bootstrap";
+import { useRouter } from 'next/router';
 
 type ISongProps  = {
     songs: Song;
@@ -10,16 +11,32 @@ type ISongProps  = {
 
 export default function SongItem(props: ISongProps) {
     const [isConnect, setIsConnect] = useState(false);
+    const router = useRouter()
+    useEffect(() => {
+        if(window.localStorage.token) {
+            setIsConnect(true);
+        }
+    }, []);
+
+    async function onDelete() {
+        if (props.songs) {
+            await getServerSide(props.songs);
+            router.push('/songs')
+        } else {
+            console.log('error');
+        }
+    }
 
     return (
         <div>
             <Navigation isConnected={isConnect} />
             <main>
-                <button type="button">
-                    <Link href="/song">Retour</Link>
-                </button>
+                <Link href="/songs"> 
+                    <Button variant="dark">Retour</Button>
+                </Link>
                 <h1>{props.songs.title}</h1>
                 <p>{props.songs.duration}</p>
+                <Button variant="danger" onClick={ onDelete }>Supprimer la musique</Button>
             </main>
         </div>
     );
@@ -40,4 +57,16 @@ export async function getServerSideProps(context: any) {
     return {
         props: { songs }
     }
+}
+
+export async function getServerSide(song: Song) {
+    const requestOptions = {
+        method: 'delete'
+    };
+    await fetch(`http://localhost:3001/Song/${song.id}`, requestOptions)
+    .then(res =>res.json())
+    .then(recipes => {
+        console.log(recipes);
+        return ({ recipes });
+    });
 }

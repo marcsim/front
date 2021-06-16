@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import styles from '../../styles/Home.module.css'
 import Navigation from '../component/navigation/navigation.component';
-import CardTemplate from '../component/card/card.component';
+import CardAlbumTemplate from '../component/card/cardAlbum.component';
 
 import { useEffect, useState } from "react";
 
@@ -16,6 +16,7 @@ type IAlbumProps  = {
 export default function album(props: IAlbumProps) {
     const [isConnect, setIsConnect] = useState(false);
     useEffect(() => {
+        console.log('local', window.localStorage);
         if(window.localStorage.token) {
             setIsConnect(true);
         }
@@ -25,24 +26,29 @@ export default function album(props: IAlbumProps) {
         <div>
             <Navigation isConnected={isConnect} />
             <div className="container">
-                <h1>Albums</h1>
-                    {/* <Route exact path="/album/add" component={ AddAlbumComponent }/> */}
+                <h1 className={styles.title}>Albums</h1>
+                <div className={styles.btn_add_right}>
                     {
                         isConnect ?  
                         <div className="btn-add">
-                            <Link href="/album/add">
+                            <Link href="/albums/addAlbum">
                                 <Button variant="danger">Ajouter un album</Button>
                             </Link>
                         </div> : <div></div>
                     }
-                    
-                <div className="row">
+                </div>
+                <div className={styles.cardMargin}>    
                 {
-                    props.albums.map((album) => 
-                        <div className="col-3 card">
-                            <CardTemplate album={ album } />
-                        </div>
-                    )
+                    props.albums.length === 0 ? <p>Aucun album disponible</p> : 
+                    <div className="row">
+                    {
+                        props.albums.map((album, i) => 
+                            <div className="col-3 card">
+                                <CardAlbumTemplate key={i} album={ album } />
+                            </div>
+                        )
+                    }
+                    </div>
                 }
                 </div>
             </div>

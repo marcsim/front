@@ -21,7 +21,10 @@
     color: black;
 }
 
-.btn_user {
-    margin-right: 10%;
+.btn_container {
     float: right;
+}
+
+.btn_user {
+    /* margin-right: 10%; */
 }
