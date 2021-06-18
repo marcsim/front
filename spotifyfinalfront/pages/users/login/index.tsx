@@ -1,7 +1,7 @@
 import { User } from './../../api/dto/user.model';
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import Navigation from '../../component/navigation/navigation.component';
+import Navigation from '../../../component/navigation/navigation.component';
 
 export default function login() {
     const [isConnect, setIsConnect] = useState(false);

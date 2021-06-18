@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Fragment } from "react";
 import Link from 'next/link';
-import { Album } from "./../../api/dto/album.model";
+import { Album } from "../../pages/api/dto/album.model";
 import './modal.style.css';
 
 type Props = {

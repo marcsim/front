@@ -1,9 +1,11 @@
 import { Artist } from "../../api/dto/artist.model";
 import Link from 'next/link';
-import Navigation from '../../component/navigation/navigation.component';
+import Navigation from '../../../component/navigation/navigation.component';
 import React, { useState } from "react";
 import { useRouter } from 'next/router';
 import { Button } from "react-bootstrap";
+import styles from '../../../styles/Home.module.css'
+
 
 type IArtistProps  = {
     artists: Artist;
@@ -25,13 +27,13 @@ export default function ArtistItem(props: IArtistProps) {
     return (
         <div>
             <Navigation isConnected={isConnect} />
-            <main>
-            <Link href="/artists"> 
-                    <Button variant="dark">Retour</Button>
+            <main className={styles.cardMargin}>
+                <Link href="/artists"> 
+                    <Button className={styles.btn_add_right} variant="dark">Retour</Button>
                 </Link>
-                <h1>{props.artists.name}</h1>
-                <p>{props.artists.isBand}</p>
-                <Button onClick={ onDelete }>Supprimer l'album</Button>
+                <h1 className={styles.title}>{props.artists.name}</h1>
+                <p style={{ marginLeft: "45%"}}>{props.artists.isBand}</p>
+                <Button style={{ marginLeft: "40%"}} onClick={ onDelete }>Supprimer l'album</Button>
             </main>
         </div>
     );

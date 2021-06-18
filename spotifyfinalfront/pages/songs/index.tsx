@@ -2,10 +2,10 @@
 import Link from 'next/link';
 import { Song } from "../api/dto/song.model";
 import styles from '../../styles/Home.module.css'
-import Navigation from '../component/navigation/navigation.component';
+import Navigation from '../../component/navigation/navigation.component';
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import CardSongTemplate from '../component/card/cardSong.component';
+import CardSongTemplate from '../../component/card/cardSong.component';
 
 type ISongProps  = {
     songs: Song[];
@@ -39,7 +39,7 @@ export default function song(props: ISongProps) {
                         <div className="row">
                         {
                             props.songs.map((song, i) => 
-                                <div className="col-3 card">
+                                <div className="col-3">
                                     <CardSongTemplate key={i} song={ song } />
                                 </div>
                             )

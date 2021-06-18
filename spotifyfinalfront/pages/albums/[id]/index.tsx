@@ -3,7 +3,9 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Album } from '../../api/dto/album.model';
-import Navigation from '../../component/navigation/navigation.component';
+import Navigation from '../../../component/navigation/navigation.component';
+import styles from '../../../styles/Home.module.css'
+
 
 type IAlbumProps  = {
     albums: Album;
@@ -30,14 +32,14 @@ export default function AlbumItem(props: IAlbumProps) {
     return (
         <div>
             <Navigation isConnected={isConnect} />
-            <main>
+            <main className={styles.cardMargin}>
                 <Link href="/albums"> 
-                    <Button variant="dark">Retour</Button>
+                    <Button className={styles.btn_add_right} variant="dark">Retour</Button>
                 </Link>
-                <h1>{props.albums.title}</h1>
-                <p>{props.albums.year}</p>
-                <p>{props.albums.cover}</p>
-                <Button variant="danger" onClick={ onDelete }>Supprimer l'album</Button>
+                <img style={{ marginLeft: "35%"}} width="150px" height="150px" src={props.albums.cover} alt="couverture de l'album" />
+                <h1 className={styles.title}>{props.albums.title}</h1>
+                <p style={{ marginLeft: "45%"}}>{props.albums.year}</p>
+                <Button style={{ marginLeft: "40%"}} variant="danger" onClick={ onDelete }>Supprimer l'album</Button>
             </main>
         </div>
     );

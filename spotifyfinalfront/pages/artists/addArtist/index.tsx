@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Button, Form } from "react-bootstrap";
-import Navigation from "../../component/navigation/navigation.component";
+import Navigation from "../../../component/navigation/navigation.component";
 import { Artist } from "../../api/dto/artist.model";
+import styles from '../../../styles/Home.module.css'
+
 
 export default function addArtist() {
     const [isConnect, setIsConnect] = useState(false);
@@ -57,25 +59,26 @@ export default function addArtist() {
 
     function onIsBandChanged(event: React.ChangeEvent<HTMLInputElement>) {
         console.log('event', event);
-        //setIsBand(event.target.value);
+        //setIsBand(event.target.form[1]?.checked);
     }
 
     return (
         <div className="container-user">
             <Navigation isConnected={isConnect} />
-            <h1>Ajouter un artiste</h1>
+            <h1 className={styles.title}>Ajouter un artiste</h1>
             <Link href="/artists"> 
-                <Button variant="dark">Retour</Button>
+                <Button className={styles.btn_add_right} variant="dark">Retour</Button>
             </Link>
-            <Form className="form">
-                <Form.Label>Nom :</Form.Label>
-                <input placeholder="Nom" type="text" value={name} onChange={ onNameChanged } />
-                <p>{ nameError }</p>
-                <Form.Label>L'artiste est-il en bande ? </Form.Label>
-                <input type="checkbox" onChange={ onIsBandChanged } />
-                <p>{ isBandError }</p>
+            <Form className={styles.cardMargin}>
+                <Form.Label style={{ marginLeft: "40%" }}>Nom :</Form.Label>
+                <br/>
+                <input style={{ marginLeft: "40%" }} placeholder="Nom" type="text" value={name} onChange={ onNameChanged } />
+                <p style={{ marginLeft: "40%" }}>{ nameError }</p>
+                <Form.Label style={{ marginLeft: "40%" }}>L'artiste est-il en bande ? </Form.Label>
+                <input style={{ marginLeft: "2%" }}type="checkbox" onChange={ onIsBandChanged } />
+                <p style={{ marginLeft: "40%" }}>{ isBandError }</p>
                 
-                <Button type="submit" onClick={onSubmit}>Valider</Button>
+                <Button style={{ marginLeft: "40%" }} type="submit" onClick={onSubmit}>Valider</Button>
             </Form>
         </div>
     );

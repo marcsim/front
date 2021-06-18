@@ -2,14 +2,14 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
-import { Artist } from '../../api/dto/artist.model';
+import { Artist } from '../../pages/api/dto/artist.model';
 
 type CardProps = {
     artist?: Artist;
 };
 export default function CardArtistTemplate(props: CardProps) {
     return (
-        <Card style={{ width: '18rem' }}>
+        <Card style={{width: "200px", marginTop: "5%"}}>
             <Card.Body>
                 <Card.Title>{ props.artist?.name }</Card.Title>
                 <Card.Subtitle>{ props.artist?.isBand }</Card.Subtitle>

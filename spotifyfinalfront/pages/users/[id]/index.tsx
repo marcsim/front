@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navigation from '../../component/navigation/navigation.component';
+import Navigation from '../../../component/navigation/navigation.component';
 
 export default function user() {
     const [isConnect, setIsConnect] = useState(false);

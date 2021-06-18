@@ -1,7 +1,7 @@
 import React, { Fragment, FunctionComponent } from 'react';
 import { ListGroup } from 'react-bootstrap';
-import { Artist } from '../../api/dto/artist.model';
-import { Song } from '../../api/dto/song.model';
+import { Artist } from '../../pages/api/dto/artist.model';
+import { Song } from '../../pages/api/dto/song.model';
 
 type ListProps = {
     artist?: Artist;

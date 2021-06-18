@@ -1,6 +1,6 @@
 import { Button, Form } from 'react-bootstrap';
 import { User } from './../../api/dto/user.model';
-import Navigation from '../../component/navigation/navigation.component';
+import Navigation from '../../../component/navigation/navigation.component';
 import { useState } from 'react';
 
 export default function register() { 

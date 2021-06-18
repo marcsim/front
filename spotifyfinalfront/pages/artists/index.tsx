@@ -2,10 +2,10 @@
 import Link from 'next/link';
 import { Artist } from "../api/dto/artist.model";
 import styles from '../../styles/Home.module.css'
-import Navigation  from '../component/navigation/navigation.component';
+import Navigation  from '../../component/navigation/navigation.component';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-import CardArtistTemplate from '../component/card/cardArtist.component';
+import CardArtistTemplate from '../../component/card/cardArtist.component';
 
 type IArtistProps  = {
     artists: Artist[];
@@ -39,7 +39,7 @@ export default function artist(props: IArtistProps) {
                         <div className="row">
                         {
                             props.artists.map((artist, i) => 
-                                <div className="col-3 card">
+                                <div className="col-3">
                                     <CardArtistTemplate key={i} artist={ artist } />
                                 </div>
                             )

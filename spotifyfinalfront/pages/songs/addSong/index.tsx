@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Button, Form } from "react-bootstrap";
-import Navigation from "../../component/navigation/navigation.component";
+import Navigation from "../../../component/navigation/navigation.component";
 import { Song } from "../../api/dto/song.model";
+import styles from '../../../styles/Home.module.css'
+
 
 export default function addArtist() {
     const [isConnect, setIsConnect] = useState(false);
     const [title, setTitle] = useState('');
-    const [duration, setDuration] = useState(0);
+    const [duration, setDuration] = useState<number>(0);
     const [titleError, setTitleError] = useState('');
     const [durationError, setDurationError] = useState('');
     const [songs, setSongs] = useState<Song[]>([]);
@@ -33,10 +35,10 @@ export default function addArtist() {
             valid = false; 
         }
 
-        // if (duration === 0) {
-        //     setDurationError('Vous devez renseigner une durée valide.');
-        //     valid = false;
-        // }
+        if (duration === 0) {
+            setDurationError('Vous devez renseigner une durée valide.');
+            valid = false;
+        }
 
         if (valid) {
 
@@ -57,25 +59,27 @@ export default function addArtist() {
     }
 
     function onDurationChanged(event: React.ChangeEvent<HTMLInputElement>) {
-        //setDuration(event.target.value);
+        setDuration(parseInt(event.target.value, 10));
     }
 
     return (
         <div className="container-user">
             <Navigation isConnected={isConnect} />
-            <h1>Ajouter une musique</h1>
+            <h1 className={styles.title}>Ajouter une musique</h1>
             <Link href="/songs"> 
-                <Button variant="dark">Retour</Button>
+                <Button className={styles.btn_add_right} variant="dark">Retour</Button>
             </Link>
-            <Form className="form">
-                <Form.Label>Titre :</Form.Label>
-                <input placeholder="Titre" type="text" value={title} onChange={ onTitleChanged } />
-                <p>{ titleError }</p>
-                <Form.Label>Durée :</Form.Label>
-                <input type="number" value={duration} onChange={ onDurationChanged } />
-                <p>{ durationError }</p>
+            <Form className={styles.cardMargin}>
+                <Form.Label style={{ marginLeft: "40%" }}>Titre :</Form.Label>
+                <br/>
+                <input style={{ marginLeft: "40%" }} placeholder="Titre" type="text" value={title} onChange={ onTitleChanged } />
+                <p style={{ marginLeft: "40%" }}>{ titleError }</p>
+                <Form.Label style={{ marginLeft: "40%" }}>Durée (en min):</Form.Label>
+                <br/>
+                <input style={{ marginLeft: "40%" }} type="number" value={duration} onChange={ onDurationChanged } />
+                <p style={{ marginLeft: "40%" }}>{ durationError }</p>
                 
-                <Button type="submit" onClick={onSubmit}>Valider</Button>
+                <Button style={{ marginLeft: "40%" }} type="submit" onClick={onSubmit}>Valider</Button>
             </Form>
         </div>
     );

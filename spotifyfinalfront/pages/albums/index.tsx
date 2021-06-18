@@ -2,8 +2,8 @@ import { Album } from "../api/dto/album.model";
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import styles from '../../styles/Home.module.css'
-import Navigation from '../component/navigation/navigation.component';
-import CardAlbumTemplate from '../component/card/cardAlbum.component';
+import Navigation from '../../component/navigation/navigation.component';
+import CardAlbumTemplate from '../../component/card/cardAlbum.component';
 
 import { useEffect, useState } from "react";
 
@@ -43,7 +43,7 @@ export default function album(props: IAlbumProps) {
                     <div className="row">
                     {
                         props.albums.map((album, i) => 
-                            <div className="col-3 card">
+                            <div className="col-3">
                                 <CardAlbumTemplate key={i} album={ album } />
                             </div>
                         )

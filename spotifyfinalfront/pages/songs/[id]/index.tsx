@@ -1,9 +1,10 @@
 import { Song } from "../../api/dto/song.model";
 import Link from 'next/link';
 import React, { useEffect, useState } from "react";
-import Navigation from '../../component/navigation/navigation.component';
+import Navigation from '../../../component/navigation/navigation.component';
 import { Button } from "react-bootstrap";
 import { useRouter } from 'next/router';
+import styles from '../../../styles/Home.module.css'
 
 type ISongProps  = {
     songs: Song;
@@ -30,13 +31,13 @@ export default function SongItem(props: ISongProps) {
     return (
         <div>
             <Navigation isConnected={isConnect} />
-            <main>
+            <main className={styles.cardMargin}>
                 <Link href="/songs"> 
-                    <Button variant="dark">Retour</Button>
+                    <Button className={styles.btn_add_right} variant="dark">Retour</Button>
                 </Link>
-                <h1>{props.songs.title}</h1>
-                <p>{props.songs.duration}</p>
-                <Button variant="danger" onClick={ onDelete }>Supprimer la musique</Button>
+                <h1 className={styles.title}>{props.songs.title}</h1>
+                <p style={{ marginLeft: "45%"}}>{props.songs.duration} min</p>
+                <Button style={{ marginLeft: "40%"}} variant="danger" onClick={ onDelete }>Supprimer la musique</Button>
             </main>
         </div>
     );
